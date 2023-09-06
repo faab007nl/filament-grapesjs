@@ -1,6 +1,6 @@
 <?php
 
-namespace Ekremogul\FilamentGrapesjs\Forms\Components\Concerns;
+namespace Faab007nl\FilamentGrapesjs\Forms\Components\Concerns;
 
 use Closure;
 

@@ -1,9 +1,9 @@
 # GrapesJS for FilamentPHP
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ekremogul/filament-grapesjs.svg?style=flat-square)](https://packagist.org/packages/ekremogul/filament-grapesjs)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/ekremogul/filament-grapesjs/run-tests?label=tests)](https://github.com/ekremogul/filament-grapesjs/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/ekremogul/filament-grapesjs/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/ekremogul/filament-grapesjs/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/ekremogul/filament-grapesjs.svg?style=flat-square)](https://packagist.org/packages/ekremogul/filament-grapesjs)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/faab007nl/filament-grapesjs.svg?style=flat-square)](https://packagist.org/packages/faab007nl/filament-grapesjs)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/faab007nl/filament-grapesjs/run-tests?label=tests)](https://github.com/faab007nl/filament-grapesjs/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/faab007nl/filament-grapesjs/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/faab007nl/filament-grapesjs/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/faab007nl/filament-grapesjs.svg?style=flat-square)](https://packagist.org/packages/faab007nl/filament-grapesjs)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -20,12 +20,12 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require ekremogul/filament-grapesjs
+composer require faab007nl/filament-grapesjs
 ```
 ## Usage
 
 ```php
-\Ekremogul\FilamentGrapesjs\Forms\Components\GrapesJs::make('content'),
+\Faab007nl\FilamentGrapesjs\Forms\Components\GrapesJs::make('content'),
 ```
 
 You can publish the config file with:

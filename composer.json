@@ -1,14 +1,18 @@
 {
-    "name": "ekremogul/filament-grapesjs",
+    "name": "faab007nl/filament-grapesjs",
     "description": "GrapesJS for FilamentPHP",
     "keywords": [
-        "ekremogul",
+        "faab007nl",
         "laravel",
         "filament-grapesjs"
     ],
-    "homepage": "https://github.com/ekremogul/filament-grapesjs",
+    "homepage": "https://github.com/faab007nl/filament-grapesjs",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Fabian Dingemans",
+            "role": "Developer"
+        },
         {
             "name": "Ekrem OĞUL",
             "email": "ekremogul@gmail.com",
@@ -30,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ekremogul\\FilamentGrapesjs\\": "src"
+            "Faab007nl\\FilamentGrapesjs\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ekremogul\\FilamentGrapesjs\\Tests\\": "tests"
+            "Faab007nl\\FilamentGrapesjs\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -55,7 +59,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ekremogul\\FilamentGrapesjs\\FilamentGrapesjsServiceProvider"
+                "Faab007nl\\FilamentGrapesjs\\FilamentGrapesjsServiceProvider"
             ]
         }
     },

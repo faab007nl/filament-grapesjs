@@ -1,6 +1,6 @@
 <?php
 
-namespace Ekremogul\FilamentGrapesjs;
+namespace Faab007nl\FilamentGrapesjs;
 
 use Filament\Facades\Filament;
 use Spatie\LaravelPackageTools\Package;

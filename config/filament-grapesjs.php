@@ -1,6 +1,6 @@
 <?php
 
-// config for Ekremogul/FilamentGrapesjs
+// config for Faab007nl/FilamentGrapesjs
 return [
 
 ];

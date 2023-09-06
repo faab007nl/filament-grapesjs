@@ -1,9 +1,9 @@
 <?php
 
-namespace Ekremogul\FilamentGrapesjs\Forms\Components;
+namespace Faab007nl\FilamentGrapesjs\Forms\Components;
 
 use Closure;
-use Ekremogul\FilamentGrapesjs\Forms\Components\Concerns\InteractsWithTools;
+use Faab007nl\FilamentGrapesjs\Forms\Components\Concerns\InteractsWithTools;
 use Filament\Forms\Components\Field;
 
 

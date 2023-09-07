@@ -1,6 +1,6 @@
 <?php
 
-namespace Faab007nl\FilamentGrapesjs;
+namespace Ekremogul\FilamentGrapesjs;
 
 class FilamentGrapesjs
 {

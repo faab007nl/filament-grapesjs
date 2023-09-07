@@ -1,12 +1,12 @@
 {
-    "name": "faab007nl/filament-grapesjs",
+    "name": "ekremogul/filament-grapesjs",
     "description": "GrapesJS for FilamentPHP",
     "keywords": [
-        "faab007nl",
+        "ekremogul",
         "laravel",
         "filament-grapesjs"
     ],
-    "homepage": "https://github.com/faab007nl/filament-grapesjs",
+    "homepage": "https://github.com/ekremogul/filament-grapesjs",
     "license": "MIT",
     "authors": [
         {
@@ -21,10 +21,11 @@
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.13.0",
-        "illuminate/contracts": "^9.0 || ^10.0"
+        "illuminate/contracts": "^9.0 || ^10.0",
+        "spatie/laravel-package-tools": "^1.13.0"
     },
     "require-dev": {
+        "filament/filament": "^3.0-stable",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^6.0",
         "orchestra/testbench": "^7.0",
@@ -34,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Faab007nl\\FilamentGrapesjs\\": "src"
+            "Ekremogul\\FilamentGrapesjs\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Faab007nl\\FilamentGrapesjs\\Tests\\": "tests"
+            "Ekremogul\\FilamentGrapesjs\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -59,7 +60,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Faab007nl\\FilamentGrapesjs\\FilamentGrapesjsServiceProvider"
+                "Ekremogul\\FilamentGrapesjs\\FilamentGrapesjsServiceProvider"
             ]
         }
     },

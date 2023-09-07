@@ -1,10 +1,10 @@
 <?php
 
-namespace Faab007nl\FilamentGrapesjs\Tests;
+namespace Ekremogul\FilamentGrapesjs\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Faab007nl\FilamentGrapesjs\FilamentGrapesjsServiceProvider;
+use Ekremogul\FilamentGrapesjs\FilamentGrapesjsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Faab007nl\\FilamentGrapesjs\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Ekremogul\\FilamentGrapesjs\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

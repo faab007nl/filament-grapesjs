@@ -1,20 +1,31 @@
-@tailwind components;
+.editor-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 9999;
 
-
-.filament-grapesjs {
-    border: 3px solid #444;
-
-
-
+    @import "gjs";
 }
-.panel__top {
-    padding: 0;
-    width: 100%;
-    display: flex;
-    position: initial;
-    justify-content: center;
-    justify-content: space-between;
+.editor-hidden{
+    display: none;
 }
-.panel__basic-actions {
-    position: initial;
+.swal2-container{
+    z-index: 9999999;
 }
+
+.toastify.toastify-success{
+    background: #28a745;
+}
+.toastify.toastify-info{
+    background: #17a2b8;
+}
+.toastify.toastify-warning{
+    background: #ffc107;
+}
+.toastify.toastify-error{
+    background: #dc3545;
+}
+

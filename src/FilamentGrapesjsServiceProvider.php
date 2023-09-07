@@ -1,8 +1,10 @@
 <?php
 
-namespace Faab007nl\FilamentGrapesjs;
+namespace Ekremogul\FilamentGrapesjs;
 
-use Filament\Facades\Filament;
+use Filament\Support\Assets\Css;
+use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -12,33 +14,29 @@ class FilamentGrapesjsServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('filament-grapesjs')
-            ->hasConfigFile()
+            ->hasRoutes()
             ->hasViews()
             ->hasAssets();
     }
-    public function packageBooted()
+
+    public function packageBooted(): void
     {
-        if (class_exists(\Filament\FilamentServiceProvider::class)) {
-            Filament::serving(function() {
-                Filament::registerScripts($this->getScripts(), true);
-                Filament::registerStyles($this->getStyles());
-            });
-        }
+        FilamentAsset::register(array_merge(
+            $this->getScripts(),
+            $this->getStyles()
+        ), 'ekremogul/filament-grapesjs');
     }
 
     public function getScripts(): array
     {
         return [
-            'grapesjs' => __DIR__ . '/../resources/dist/js/grapes.min.js',
-            'filament-grapesjs-tailwindcss' => __DIR__ . '/../resources/dist/js/grapesjs-tailwind.min.js',
-            'filament-grapesjs' => __DIR__ . '/../resources/dist/js/grapes.js',
+            Js::make('filament-grapesjs', __DIR__ . '/../resources/dist/js/grapes.js'),
         ];
     }
     public function getStyles(): array
     {
         return  [
-            'grapesjs' => __DIR__ . '/../resources/dist/css/grapes.min.css',
-            'filament-grapesjs' => __DIR__ . '/../resources/dist/css/grapes.css'
+            Css::make('filament-grapesjs', __DIR__ . '/../resources/dist/css/grapes.css'),
         ];
     }
 }

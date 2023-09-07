@@ -1,34 +1,29 @@
-<x-forms::field-wrapper
-    :id="$getId()"
-    :label="$getLabel()"
-    :label-sr-only="$isLabelHidden()"
-    :helper-text="$getHelperText()"
-    :hint="$getHint()"
-    :hint-icon="$getHintIcon()"
-    :required="$isRequired()"
-    :state-path="$getStatePath()"
+<x-dynamic-component
+        :component="$getFieldWrapperView()"
+        :id="$getId()"
+        :label="$getLabel()"
+        :label-sr-only="$isLabelHidden()"
+        :helper-text="$getHelperText()"
+        :hint="$getHint()"
+        :required="$isRequired()"
+        :state-path="$getStatePath()"
 >
-    <div class="panel__top">
-        <div class="panel__basic-actions"></div>
-    </div>
+    @php
+        $grapesJsOptions = $getGrapesJsOptions();
+    @endphp
     <div
-        wire:ignore
         class="filament-grapesjs"
-        x-data="grapesjs({
-                state: $wire.entangle('{{ $getStatePath() }}').defer,
-                statePath: '{{ $getStatePath() }}',
-                readOnly: {{ $isDisabled() ? 'true' : 'false' }},
-                tools: @js($getTools()),
-                minHeight: @js($getMinHeight())
-            })"
     >
+        <script>
+            window.grapesJsOptions = @json($grapesJsOptions);
+        </script>
 
-        <div
-            class="grapesjs-wrapper"
-        >
-            {!! $getHtmlData() !!}
+        <x-filament::button data-open-editor="">
+            Open Editor
+        </x-filament::button>
+
+        <div class="editor-container editor-hidden" data-editor-container="">
+            <div id="gjs" class="editor-canvas" style="height:0px; overflow:hidden"></div>
         </div>
     </div>
-    <div id="blocks"></div>
-
-</x-forms::field-wrapper>
+</x-dynamic-component>

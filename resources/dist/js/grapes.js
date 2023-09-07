@@ -35,6 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var grapesjs_preset_webpage__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(grapesjs_preset_webpage__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var grapesjs_dist_css_grapes_min_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! grapesjs/dist/css/grapes.min.css */ "./node_modules/grapesjs/dist/css/grapes.min.css");
 /* harmony import */ var toastify_js_src_toastify_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! toastify-js/src/toastify.css */ "./node_modules/toastify-js/src/toastify.css");
+/* provided dependency */ var Buffer = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js")["Buffer"];
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -51,222 +52,235 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 document.addEventListener("alpine:init", function () {
-  var _pluginsOpts;
-  Alpine.data('someFormComponent', function (_ref) {
+  Alpine.data('grapesjs', function (_ref) {
     var state = _ref.state,
-      someAttr = _ref.someAttr;
+      statePath = _ref.statePath,
+      readOnly = _ref.readOnly,
+      optionsEncoded = _ref.optionsEncoded;
     return {
+      editor: null,
       state: state,
-      someAttr: someAttr,
-      init: function init() {
-        console.log(this.state);
-      }
-    };
-  });
-  if (window.grapesJsOptions === undefined) {
-    console.error('GrapesJs options not defined');
-    return;
-  }
-  var options = window.grapesJsOptions;
-  var openEditorBtn = document.querySelector('[data-open-editor]');
-  var editorContainer = document.querySelector('[data-editor-container]');
-  var editorHasChanges = false;
-  openEditorBtn.addEventListener('click', function () {
-    editorContainer.classList.remove('editor-hidden');
-  });
-  var editor = grapesjs__WEBPACK_IMPORTED_MODULE_13___default().init({
-    container: '#gjs',
-    height: '1024px',
-    width: '100%',
-    storageManager: {
-      type: 'remote',
-      autosave: options.autosave,
-      stepsBeforeSave: options.stepsBeforeSave,
-      recovery: options.recovery,
-      storeHtml: options.storeHtml,
-      storeStyles: options.storeStyles,
-      storeCss: options.storeCss,
-      options: {
-        remote: {
-          onLoad: function onLoad(data) {
-            editorHasChanges = false;
-          },
-          onStore: function onStore(data) {}
-        }
-      }
-    },
-    blockManager: {
-      blocks: options.customBlocks
-    },
-    plugins: [(grapesjs_blocks_basic__WEBPACK_IMPORTED_MODULE_2___default()), (grapesjs_component_countdown__WEBPACK_IMPORTED_MODULE_3___default()), (grapesjs_plugin_export__WEBPACK_IMPORTED_MODULE_4___default()), (grapesjs_tabs__WEBPACK_IMPORTED_MODULE_5___default()), (grapesjs_custom_code__WEBPACK_IMPORTED_MODULE_6___default()), (grapesjs_touch__WEBPACK_IMPORTED_MODULE_7___default()), (grapesjs_tooltip__WEBPACK_IMPORTED_MODULE_8___default()), (grapesjs_typed__WEBPACK_IMPORTED_MODULE_9___default()), (grapesjs_preset_webpage__WEBPACK_IMPORTED_MODULE_10___default())],
-    pluginsOpts: (_pluginsOpts = {}, _defineProperty(_pluginsOpts, (grapesjs_blocks_basic__WEBPACK_IMPORTED_MODULE_2___default()), {
-      flexGrid: true
-    }), _defineProperty(_pluginsOpts, (grapesjs_component_countdown__WEBPACK_IMPORTED_MODULE_3___default()), {
-      countdownBlock: {
-        category: 'Extra'
+      open: false,
+      editorHasChanges: false,
+      openEditor: function openEditor() {
+        this.open = true;
       },
-      dateInputType: 'datetime-local'
-    }), _defineProperty(_pluginsOpts, (grapesjs_tooltip__WEBPACK_IMPORTED_MODULE_8___default()), {
-      blockTooltip: {
-        category: 'Extra'
-      }
-    }), _defineProperty(_pluginsOpts, (grapesjs_tabs__WEBPACK_IMPORTED_MODULE_5___default()), {
-      tabsBlock: {
-        category: 'Extra'
-      }
-    }), _defineProperty(_pluginsOpts, (grapesjs_typed__WEBPACK_IMPORTED_MODULE_9___default()), {
-      block: {
-        category: 'Extra',
-        content: {
-          type: 'typed',
-          'type-speed': 40,
-          strings: ['Text row one', 'Text row two', 'Text row three']
-        }
-      }
-    }), _defineProperty(_pluginsOpts, (grapesjs_preset_webpage__WEBPACK_IMPORTED_MODULE_10___default()), {
-      modalImportTitle: 'Import Template',
-      modalImportLabel: '<div style="margin-bottom: 10px; font-size: 13px;">Paste here your HTML/CSS and click Import</div>',
-      modalImportContent: function modalImportContent(editor) {
-        return editor.getHtml() + '<style>' + editor.getCss() + '</style>';
-      }
-    }), _pluginsOpts)
-  });
-  var panelManager = editor.Panels;
-  editor.on('update', function (e) {
-    editorHasChanges = true;
-  });
-  if (options.deviceManagerBtnEnabled) {
-    // Change the devices dropdown to 3 buttons
-    editor.getConfig().showDevices = 0;
-    panelManager.addPanel({
-      id: 'devices',
-      buttons: [{
-        id: "set-device-desktop",
-        command: function command(e) {
-          return e.setDevice("Desktop");
-        },
-        className: "fa fa-desktop",
-        active: 1
-      }, {
-        id: "set-device-tablet",
-        command: function command(e) {
-          return e.setDevice("Tablet");
-        },
-        className: "fa fa-tablet"
-      }, {
-        id: "set-device-mobile",
-        command: function command(e) {
-          return e.setDevice("Mobile portrait");
-        },
-        className: "fa fa-mobile"
-      }]
-    });
-  } else {
-    editor.getConfig().showDevices = 0;
-  }
-  if (!options.viewComponentsBtnEnabled) {
-    panelManager.removeButton('options', 'sw-visibility');
-  }
-  if (!options.previewBtnEnabled) {
-    panelManager.removeButton('options', 'preview');
-  }
-  if (!options.viewCodeBtnEnabled) {
-    panelManager.removeButton('options', 'export-template');
-  }
-  if (!options.fullscreenBtnEnabled) {
-    panelManager.removeButton('options', 'fullscreen');
-  }
-  if (options.undoBtnEnabled) {
-    panelManager.addButton('options', {
-      id: 'undo',
-      className: 'fa fa-undo',
-      command: function command() {
-        editor.UndoManager.undo();
-      }
-    });
-  }
-  if (options.redoBtnEnabled) {
-    panelManager.addButton('options', {
-      id: 'redo',
-      className: 'fa fa-repeat',
-      command: function command() {
-        editor.UndoManager.redo();
-      }
-    });
-  }
-  if (options.importBtnEnabled) {
-    panelManager.addButton('options', {
-      id: 'import',
-      className: 'fa fa-download',
-      command: function command() {
-        editor.runCommand('gjs-open-import-webpage');
-      }
-    });
-  }
-  if (options.clearCanvasBtnEnabled) {
-    panelManager.addButton('options', {
-      id: 'clear',
-      className: 'fa fa-trash',
-      command: function command() {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-          title: 'Are you sure?',
-          showDenyButton: false,
-          showCancelButton: true,
-          confirmButtonText: 'Yes'
-        }).then(function (result) {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            editor.runCommand('core:canvas-clear');
-            toastify_js__WEBPACK_IMPORTED_MODULE_1___default()({
-              text: "Canvas cleared!",
-              className: "toastify-success"
-            }).showToast();
-          }
+      init: function init() {
+        var _this = this,
+          _pluginsOpts;
+        var options = JSON.parse(new Buffer(optionsEncoded, 'base64').toString('ascii'));
+        this.$watch('open', function () {
+          console.log('open changed');
+          console.log(_this.open);
         });
-      }
-    });
-  }
-  panelManager.addButton('options', {
-    id: 'save',
-    className: 'fa fa-save',
-    command: function command() {
-      editor.store().then(function (r) {
-        toastify_js__WEBPACK_IMPORTED_MODULE_1___default()({
-          text: "Saved!",
-          className: "toastify-success"
-        }).showToast();
-      });
-    }
-  });
-  panelManager.addButton('options', {
-    id: 'exit',
-    className: 'fa fa-times',
-    command: function command() {
-      if (editorHasChanges) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-          title: 'Do you want to save the changes?',
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: 'Save',
-          denyButtonText: "Don't save"
-        }).then(function (result) {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            editor.store().then(function (r) {
+        if (options === undefined) {
+          console.log('GrapesJs init failed: options undefined');
+          return;
+        }
+        console.log('GrapesJs init');
+        console.log(options);
+        this.editor = grapesjs__WEBPACK_IMPORTED_MODULE_13___default().init({
+          container: '#gjs',
+          height: '1024px',
+          width: '100%',
+          storageManager: {
+            type: 'remote',
+            autosave: options.autosave,
+            stepsBeforeSave: options.stepsBeforeSave,
+            recovery: options.recovery,
+            storeHtml: options.storeHtml,
+            storeStyles: options.storeStyles,
+            storeCss: options.storeCss,
+            options: {
+              remote: {
+                urlStore: options.urlStore,
+                urlLoad: options.urlLoad,
+                onLoad: function onLoad(res) {
+                  console.log('onLoad', res);
+                },
+                onStore: function onStore(res) {
+                  console.log('onStore', res);
+                }
+              }
+            }
+          },
+          blockManager: {
+            blocks: [] // TODO:
+          },
+
+          plugins: [(grapesjs_blocks_basic__WEBPACK_IMPORTED_MODULE_2___default()), (grapesjs_component_countdown__WEBPACK_IMPORTED_MODULE_3___default()), (grapesjs_plugin_export__WEBPACK_IMPORTED_MODULE_4___default()), (grapesjs_tabs__WEBPACK_IMPORTED_MODULE_5___default()), (grapesjs_custom_code__WEBPACK_IMPORTED_MODULE_6___default()), (grapesjs_touch__WEBPACK_IMPORTED_MODULE_7___default()), (grapesjs_tooltip__WEBPACK_IMPORTED_MODULE_8___default()), (grapesjs_typed__WEBPACK_IMPORTED_MODULE_9___default()), (grapesjs_preset_webpage__WEBPACK_IMPORTED_MODULE_10___default())],
+          pluginsOpts: (_pluginsOpts = {}, _defineProperty(_pluginsOpts, (grapesjs_blocks_basic__WEBPACK_IMPORTED_MODULE_2___default()), {
+            flexGrid: true
+          }), _defineProperty(_pluginsOpts, (grapesjs_component_countdown__WEBPACK_IMPORTED_MODULE_3___default()), {
+            countdownBlock: {
+              category: 'Extra'
+            },
+            dateInputType: 'datetime-local'
+          }), _defineProperty(_pluginsOpts, (grapesjs_tooltip__WEBPACK_IMPORTED_MODULE_8___default()), {
+            blockTooltip: {
+              category: 'Extra'
+            }
+          }), _defineProperty(_pluginsOpts, (grapesjs_tabs__WEBPACK_IMPORTED_MODULE_5___default()), {
+            tabsBlock: {
+              category: 'Extra'
+            }
+          }), _defineProperty(_pluginsOpts, (grapesjs_typed__WEBPACK_IMPORTED_MODULE_9___default()), {
+            block: {
+              category: 'Extra',
+              content: {
+                type: 'typed',
+                'type-speed': 40,
+                strings: ['Text row one', 'Text row two', 'Text row three']
+              }
+            }
+          }), _defineProperty(_pluginsOpts, (grapesjs_preset_webpage__WEBPACK_IMPORTED_MODULE_10___default()), {
+            modalImportTitle: 'Import Template',
+            modalImportLabel: '<div style="margin-bottom: 10px; font-size: 13px;">Paste here your HTML/CSS and click Import</div>',
+            modalImportContent: function modalImportContent(editor) {
+              return editor.getHtml() + '<style>' + editor.getCss() + '</style>';
+            }
+          }), _pluginsOpts)
+        });
+        this.editor.on('update', function (e) {
+          this.editorHasChanges = true;
+        });
+        if (options.deviceManagerBtnEnabled) {
+          // Change the devices dropdown to 3 buttons
+          this.editor.getConfig().showDevices = 0;
+          this.editor.Panels.addPanel({
+            id: 'devices',
+            buttons: [{
+              id: "set-device-desktop",
+              command: function command(e) {
+                return e.setDevice("Desktop");
+              },
+              className: "fa fa-desktop",
+              active: 1
+            }, {
+              id: "set-device-tablet",
+              command: function command(e) {
+                return e.setDevice("Tablet");
+              },
+              className: "fa fa-tablet"
+            }, {
+              id: "set-device-mobile",
+              command: function command(e) {
+                return e.setDevice("Mobile portrait");
+              },
+              className: "fa fa-mobile"
+            }]
+          });
+        } else {
+          this.editor.getConfig().showDevices = 0;
+        }
+        if (!options.viewComponentsBtnEnabled) {
+          this.editor.Panels.removeButton('options', 'sw-visibility');
+        }
+        if (!options.previewBtnEnabled) {
+          this.editor.Panels.removeButton('options', 'preview');
+        }
+        if (!options.viewCodeBtnEnabled) {
+          this.editor.Panels.removeButton('options', 'export-template');
+        }
+        if (!options.fullscreenBtnEnabled) {
+          this.editor.Panels.removeButton('options', 'fullscreen');
+        }
+        if (options.undoBtnEnabled) {
+          this.editor.Panels.addButton('options', {
+            id: 'undo',
+            className: 'fa fa-undo',
+            command: function command() {
+              this.editor.UndoManager.undo();
+            }
+          });
+        }
+        if (options.redoBtnEnabled) {
+          this.editor.Panels.addButton('options', {
+            id: 'redo',
+            className: 'fa fa-repeat',
+            command: function command() {
+              this.editor.UndoManager.redo();
+            }
+          });
+        }
+        if (options.importBtnEnabled) {
+          this.editor.Panels.addButton('options', {
+            id: 'import',
+            className: 'fa fa-download',
+            command: function command() {
+              this.editor.runCommand('gjs-open-import-webpage');
+            }
+          });
+        }
+        if (options.clearCanvasBtnEnabled) {
+          this.editor.Panels.addButton('options', {
+            id: 'clear',
+            className: 'fa fa-trash',
+            command: function command() {
+              var _this2 = this;
+              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                title: 'Are you sure?',
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: 'Yes'
+              }).then(function (result) {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  _this2.editor.runCommand('core:canvas-clear');
+                  toastify_js__WEBPACK_IMPORTED_MODULE_1___default()({
+                    text: "Canvas cleared!",
+                    className: "toastify-success"
+                  }).showToast();
+                }
+              });
+            }
+          });
+        }
+        this.editor.Panels.addButton('options', {
+          id: 'save',
+          className: 'fa fa-save',
+          command: function command() {
+            this.editor.store(this.editor.getProjectData()).then(function (r) {
               toastify_js__WEBPACK_IMPORTED_MODULE_1___default()({
                 text: "Saved!",
                 className: "toastify-success"
               }).showToast();
             });
-            editorContainer.classList.add('editor-hidden');
-          } else if (result.isDenied) {
-            editorContainer.classList.add('editor-hidden');
           }
         });
-      } else {
-        editorContainer.classList.add('editor-hidden');
+        this.editor.Panels.addButton('options', {
+          id: 'exit',
+          className: 'fa fa-times',
+          command: function command() {
+            var _this3 = this;
+            if (this.editorHasChanges) {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: "Don't save"
+              }).then(function (result) {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  _this3.editor.store(_this3.editor.getProjectData()).then(function (r) {
+                    toastify_js__WEBPACK_IMPORTED_MODULE_1___default()({
+                      text: "Saved!",
+                      className: "toastify-success"
+                    }).showToast();
+                  });
+                  _this3.open = false;
+                } else if (result.isDenied) {
+                  _this3.open = false;
+                }
+              });
+            } else {
+              this.open = false;
+            }
+          }
+        });
       }
-    }
+    };
   });
 });
 

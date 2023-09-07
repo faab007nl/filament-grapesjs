@@ -19,8 +19,9 @@
 
             document.addEventListener('livewire:init', () => {
                 setTimeout(() => {
-                    Livewire.dispatch('test', { test: 'test' });
-                    console.log('test');
+                    Livewire.dispatch('my-event');
+                    console.log(Livewire);
+                    console.log('test 2');
                 }, 5000);
             })
         </script>

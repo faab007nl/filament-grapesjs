@@ -11,10 +11,11 @@ class GrapesJs extends Field
 {
     use HasGrapesJsOptions;
 
-    #[On('test')]
-    public function test($data): void
+    protected array $listeners = ['my-event' => 'test'];
+
+    public function test(): void
     {
-        file_put_contents('test.txt', json_encode($data));
+        dd("HELLO");
     }
 
     protected string $view = 'filament-grapesjs::forms.components.fields.grapesjs';

@@ -16,6 +16,13 @@
     >
         <script>
             window.grapesJsOptions = @json($grapesJsOptions);
+
+            document.addEventListener('livewire:init', () => {
+                setTimeout(() => {
+                    Livewire.dispatch('test', { test: 'test' });
+                    console.log('test');
+                }, 5000);
+            })
         </script>
 
         <x-filament::button data-open-editor="">

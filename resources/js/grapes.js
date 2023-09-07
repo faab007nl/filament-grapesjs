@@ -16,15 +16,16 @@ import "grapesjs/dist/css/grapes.min.css";
 import "toastify-js/src/toastify.css";
 
 document.addEventListener("alpine:init", function() {
-    Alpine.data('someFormComponent', ({ state, someAttr }) => ({
-        state,
-
-        someAttr,
-
-        init() {
-            console.log(this.state)
-        },
-    }));
+    Alpine.data(
+        "grapesjs",
+        ({ state, statePath, readOnly }) => ({
+            state: state,
+            init() {
+                console.log(state);
+                console.log(statePath);
+            }
+        })
+    )
 
     if (window.grapesJsOptions === undefined) {
         console.error('GrapesJs options not defined');

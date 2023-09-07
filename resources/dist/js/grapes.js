@@ -88,8 +88,6 @@ document.addEventListener("alpine:init", function () {
       storeCss: options.storeCss,
       options: {
         remote: {
-          urlStore: '/admin/emails/templates/store',
-          urlLoad: '/admin/emails/templates/load',
           onLoad: function onLoad(data) {
             editorHasChanges = false;
           },

@@ -1,8 +1,7 @@
-$primaryColor: #212121;
-$secondaryColor: #a4a4a4;
-$tertiaryColor: #ff0000;
-$quaternaryColor: #b20000;
-$colorHighlight: #ff5454;
+$primaryColor: var(--grapesJsEditorColor);
+$secondaryColor: var(--grapesJsTextColor);
+$quaternaryColor: var(--grapesJsTextActiveColor);
+$pageBackgroundColor: var(--grapesJsEditorBgColor);
 
 @import "grapesjs/src/styles/scss/main.scss";
 

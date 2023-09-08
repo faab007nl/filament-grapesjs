@@ -7,6 +7,17 @@
             })"
     class="filament-grapesjs"
 >
+    <style>
+        :root{
+            /*
+                TODO: Finish color options
+            */
+            --grapesJsEditorColor: #212121;
+            --grapesJsTextColor: #818181;
+            --grapesJsTextActiveColor: #ffffff;
+            --grapesJsPageBgColor: #ffffff;
+        }
+    </style>
 
     <x-filament::button @click="openEditor">
         Open Editor

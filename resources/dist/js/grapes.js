@@ -206,7 +206,8 @@ document.addEventListener("alpine:init", function () {
                     console.log('storage:store');
                     console.log(editorData);
                     console.log(htmlExport);
-                  case 7:
+                    console.log(self.state);
+                  case 8:
                   case "end":
                     return _context2.stop();
                 }

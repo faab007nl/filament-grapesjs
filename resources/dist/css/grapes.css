@@ -992,40 +992,40 @@
   cursor: grabbing !important;
 }
 .editor-container .gjs-one-bg {
-  background-color: #212121;
+  background-color: var(--grapesJsEditorColor);
 }
 .editor-container .gjs-one-color {
-  color: #212121;
+  color: var(--grapesJsEditorColor);
 }
 .editor-container .gjs-one-color-h:hover {
-  color: #212121;
+  color: var(--grapesJsEditorColor);
 }
 .editor-container .gjs-two-bg {
-  background-color: #a4a4a4;
+  background-color: var(--grapesJsTextColor);
 }
 .editor-container .gjs-two-color {
-  color: #a4a4a4;
+  color: var(--grapesJsTextColor);
 }
 .editor-container .gjs-two-color-h:hover {
-  color: #a4a4a4;
+  color: var(--grapesJsTextColor);
 }
 .editor-container .gjs-three-bg {
-  background-color: #ff0000;
+  background-color: #804f7b;
 }
 .editor-container .gjs-three-color {
-  color: #ff0000;
+  color: #804f7b;
 }
 .editor-container .gjs-three-color-h:hover {
-  color: #ff0000;
+  color: #804f7b;
 }
 .editor-container .gjs-four-bg {
-  background-color: #b20000;
+  background-color: var(--grapesJsTextActiveColor);
 }
 .editor-container .gjs-four-color {
-  color: #b20000;
+  color: var(--grapesJsTextActiveColor);
 }
 .editor-container .gjs-four-color-h:hover {
-  color: #b20000;
+  color: var(--grapesJsTextActiveColor);
 }
 .editor-container .gjs-danger-bg {
   background-color: #dd3636;
@@ -1052,8 +1052,8 @@
   fill: #ffca6f;
 }
 .editor-container .gjs-color-hl {
-  color: #ff5454;
-  fill: #ff5454;
+  color: #71b7f1;
+  fill: #71b7f1;
 }
 .editor-container .gjs-fonts::before {
   display: block;

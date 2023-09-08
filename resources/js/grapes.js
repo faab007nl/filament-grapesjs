@@ -184,6 +184,8 @@ document.addEventListener("alpine:init", function() {
                     console.log('storage:store');
                     console.log(editorData);
                     console.log(htmlExport);
+
+                    console.log(self.state);
                 });
 
                 if (options.deviceManagerBtnEnabled) {

@@ -28,15 +28,11 @@ document.addEventListener("alpine:init", function() {
             },
 
             init() {
+                const self = this;
                 const options = JSON.parse(new Buffer(optionsEncoded, 'base64').toString('ascii'));
 
-                this.$watch('open', () => {
-                    console.log('open changed')
-                    console.log(this.open)
-                });
-
                 if (options === undefined) {
-                    console.log('GrapesJs init failed: options undefined');
+                    console.error('GrapesJs init failed: options undefined');
                     return;
                 }
 
@@ -47,27 +43,6 @@ document.addEventListener("alpine:init", function() {
                     container: '#gjs',
                     height: '1024px',
                     width: '100%',
-                    storageManager: {
-                        type: 'remote',
-                        autosave: options.autosave,
-                        stepsBeforeSave: options.stepsBeforeSave,
-                        recovery: options.recovery,
-                        storeHtml: options.storeHtml,
-                        storeStyles: options.storeStyles,
-                        storeCss: options.storeCss,
-                        options: {
-                            remote: {
-                                urlStore: options.urlStore,
-                                urlLoad: options.urlLoad,
-                                onLoad: function(res) {
-                                    console.log('onLoad', res);
-                                },
-                                onStore: function(res) {
-                                    console.log('onStore', res);
-                                },
-                            },
-                        },
-                    },
                     blockManager: {
                         blocks: [], // TODO:
                     },
@@ -122,10 +97,93 @@ document.addEventListener("alpine:init", function() {
                             },
                         },
                     },
+                    storageManager: {
+                        type: 'local',
+                        autosave: options.autosave,
+                        stepsBeforeSave: options.stepsBeforeSave,
+                        recovery: options.recovery,
+                        storeHtml: options.storeHtml,
+                        storeStyles: options.storeStyles,
+                        storeCss: options.storeCss,
+                    },
                 });
 
                 this.editor.on('update', function(e) {
-                    this.editorHasChanges = true;
+                    self.editorHasChanges = true;
+                });
+
+                const storageManager = this.editor.Storage;
+                this.editor.on('load', async function (e) {
+                    console.log('load');
+
+                    const newData = {
+                        "assets": [],
+                        "styles": [
+                            {
+                                "selectors": [
+                                    "#ibg9"
+                                ],
+                                "style": {
+                                    "padding": "10px",
+                                    "color": "red",
+                                    "font-size": "56px",
+                                    "font-weight": "700"
+                                }
+                            }
+                        ],
+                        "pages": [
+                            {
+                                "frames": [
+                                    {
+                                        "component": {
+                                            "type": "wrapper",
+                                            "stylable": [
+                                                "background",
+                                                "background-color",
+                                                "background-image",
+                                                "background-repeat",
+                                                "background-attachment",
+                                                "background-position",
+                                                "background-size"
+                                            ],
+                                            "attributes": {
+                                                "id": "izjf"
+                                            },
+                                            "components": [
+                                                {
+                                                    "type": "text",
+                                                    "attributes": {
+                                                        "id": "ibg9"
+                                                    },
+                                                    "components": [
+                                                        {
+                                                            "type": "textnode",
+                                                            "content": "Hello World!!!"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "type": "main",
+                                "id": "PaLcdEZXCUqz85kV"
+                            }
+                        ]
+                    };
+                    await storageManager.store(newData);
+                });
+                this.editor.on('storage:store', async function(e) {
+                    const editorData = await storageManager.load();
+                    const htmlExport = self.editor.getHtml();
+
+                    // Store the editorData and htmlExport
+                    // editorData is the data that is used to reuse in the editor
+                    // htmlExport is the html that will be used to display the page
+
+                    console.log('storage:store');
+                    console.log(editorData);
+                    console.log(htmlExport);
                 });
 
                 if (options.deviceManagerBtnEnabled) {
@@ -160,7 +218,7 @@ document.addEventListener("alpine:init", function() {
                         id: 'undo',
                         className: 'fa fa-undo',
                         command: function () {
-                            this.editor.UndoManager.undo();
+                            self.editor.UndoManager.undo();
                         }
                     });
                 }
@@ -169,7 +227,7 @@ document.addEventListener("alpine:init", function() {
                         id: 'redo',
                         className: 'fa fa-repeat',
                         command: function () {
-                            this.editor.UndoManager.redo();
+                            self.editor.UndoManager.redo();
                         }
                     });
                 }
@@ -178,7 +236,7 @@ document.addEventListener("alpine:init", function() {
                         id: 'import',
                         className: 'fa fa-download',
                         command: function () {
-                            this.editor.runCommand('gjs-open-import-webpage');
+                            self.editor.runCommand('gjs-open-import-webpage');
                         }
                     });
                 }
@@ -195,7 +253,7 @@ document.addEventListener("alpine:init", function() {
                             }).then((result) => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    this.editor.runCommand('core:canvas-clear');
+                                    self.editor.runCommand('core:canvas-clear');
                                     Toastify({
                                         text: "Canvas cleared!",
                                         className: "toastify-success",
@@ -210,7 +268,7 @@ document.addEventListener("alpine:init", function() {
                     id: 'save',
                     className: 'fa fa-save',
                     command: function () {
-                        this.editor.store(this.editor.getProjectData()).then(r => {
+                        self.editor.store(self.editor.getProjectData()).then(r => {
                             Toastify({
                                 text: "Saved!",
                                 className: "toastify-success",
@@ -218,11 +276,12 @@ document.addEventListener("alpine:init", function() {
                         });
                     }
                 });
+
                 this.editor.Panels.addButton('options', {
                     id: 'exit',
                     className: 'fa fa-times',
                     command: function () {
-                        if (this.editorHasChanges) {
+                        if (self.editorHasChanges) {
                             Swal.fire({
                                 title: 'Do you want to save the changes?',
                                 showDenyButton: true,
@@ -232,19 +291,19 @@ document.addEventListener("alpine:init", function() {
                             }).then((result) => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    this.editor.store(this.editor.getProjectData()).then(r => {
+                                    self.editor.store(self.editor.getProjectData()).then(r => {
                                         Toastify({
                                             text: "Saved!",
                                             className: "toastify-success",
                                         }).showToast();
                                     });
-                                    this.open = false;
+                                    self.open = false;
                                 } else if (result.isDenied) {
-                                    this.open = false;
+                                    self.open = false;
                                 }
                             });
                         }else{
-                            this.open = false;
+                            self.open = false;
                         }
                     }
                 });

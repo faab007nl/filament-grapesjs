@@ -7,9 +7,6 @@
             })"
     class="filament-grapesjs"
 >
-{{--    <script>--}}
-{{--        window.grapesJsOptions = @json($grapesJsOptions);--}}
-{{--    </script>--}}
 
     <x-filament::button @click="openEditor">
         Open Editor

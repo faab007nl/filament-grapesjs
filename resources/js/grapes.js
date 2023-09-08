@@ -112,6 +112,7 @@ document.addEventListener("alpine:init", function() {
                     self.editorHasChanges = true;
                 });
 
+                let editorLoaded = false;
                 const storageManager = this.editor.Storage;
                 this.editor.on('load', async function (e) {
                     console.log('load');
@@ -172,8 +173,14 @@ document.addEventListener("alpine:init", function() {
                         ]
                     };
                     await storageManager.store(newData);
+
+                    setTimeout(function () {
+                        editorLoaded = true;
+                    }, 1000);
                 });
                 this.editor.on('storage:store', async function(e) {
+                    if(!editorLoaded) return;
+
                     const editorData = await storageManager.load();
                     const htmlExport = self.editor.getHtml();
 

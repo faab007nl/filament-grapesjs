@@ -132,6 +132,7 @@ document.addEventListener("alpine:init", function () {
         this.editor.on('update', function (e) {
           self.editorHasChanges = true;
         });
+        var editorLoaded = false;
         var storageManager = this.editor.Storage;
         this.editor.on('load', /*#__PURE__*/function () {
           var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
@@ -179,6 +180,10 @@ document.addEventListener("alpine:init", function () {
                     _context.next = 4;
                     return storageManager.store(newData);
                   case 4:
+                    setTimeout(function () {
+                      editorLoaded = true;
+                    }, 1000);
+                  case 5:
                   case "end":
                     return _context.stop();
                 }
@@ -196,9 +201,15 @@ document.addEventListener("alpine:init", function () {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    _context2.next = 2;
-                    return storageManager.load();
+                    if (editorLoaded) {
+                      _context2.next = 2;
+                      break;
+                    }
+                    return _context2.abrupt("return");
                   case 2:
+                    _context2.next = 4;
+                    return storageManager.load();
+                  case 4:
                     editorData = _context2.sent;
                     htmlExport = self.editor.getHtml(); // Store the editorData and htmlExport
                     // editorData is the data that is used to reuse in the editor
@@ -207,7 +218,7 @@ document.addEventListener("alpine:init", function () {
                     console.log(editorData);
                     console.log(htmlExport);
                     console.log(self.state);
-                  case 8:
+                  case 10:
                   case "end":
                     return _context2.stop();
                 }

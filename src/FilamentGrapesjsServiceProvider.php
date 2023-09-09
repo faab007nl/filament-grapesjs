@@ -2,6 +2,7 @@
 
 namespace Ekremogul\FilamentGrapesjs;
 
+use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
@@ -30,7 +31,7 @@ class FilamentGrapesjsServiceProvider extends PackageServiceProvider
     public function getScripts(): array
     {
         return [
-            Js::make('filament-grapesjs', __DIR__ . '/../resources/dist/js/grapes.js'),
+            AlpineComponent::make('filament-grapesjs-component', __DIR__ . '/../resources/dist/js/components/filament-grapesjs-component.js'),
         ];
     }
     public function getStyles(): array

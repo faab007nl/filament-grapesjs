@@ -1,0 +1,22 @@
+// resources/js/components/filament-grapesjs-component.js
+function filamentGrapesJsComponent({
+  state,
+  statePath,
+  readOnly,
+  options
+}) {
+  return {
+    state,
+    statePath,
+    readOnly,
+    options,
+    init: function() {
+      console.log("filamentGrapesJsComponent init");
+      console.log(this.state);
+    }
+  };
+}
+export {
+  filamentGrapesJsComponent as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiLi4vLi4vLi4vanMvY29tcG9uZW50cy9maWxhbWVudC1ncmFwZXNqcy1jb21wb25lbnQuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIGZpbGFtZW50R3JhcGVzSnNDb21wb25lbnQoe1xuICAgICAgc3RhdGUsXG4gICAgICBzdGF0ZVBhdGgsXG4gICAgICByZWFkT25seSxcbiAgICAgIG9wdGlvbnNcbiAgfSkge1xuICAgIHJldHVybiB7XG4gICAgICAgIHN0YXRlLFxuICAgICAgICBzdGF0ZVBhdGgsXG4gICAgICAgIHJlYWRPbmx5LFxuICAgICAgICBvcHRpb25zLFxuXG4gICAgICAgIGluaXQ6IGZ1bmN0aW9uICgpIHtcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKCdmaWxhbWVudEdyYXBlc0pzQ29tcG9uZW50IGluaXQnKTtcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKHRoaXMuc3RhdGUpO1xuICAgICAgICB9LFxuICAgIH1cbn1cbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBZSxTQUFSLDBCQUEyQztBQUFBLEVBQzVDO0FBQUEsRUFDQTtBQUFBLEVBQ0E7QUFBQSxFQUNBO0FBQ0osR0FBRztBQUNELFNBQU87QUFBQSxJQUNIO0FBQUEsSUFDQTtBQUFBLElBQ0E7QUFBQSxJQUNBO0FBQUEsSUFFQSxNQUFNLFdBQVk7QUFDZCxjQUFRLElBQUksZ0NBQWdDO0FBQzVDLGNBQVEsSUFBSSxLQUFLLEtBQUs7QUFBQSxJQUMxQjtBQUFBLEVBQ0o7QUFDSjsiLAogICJuYW1lcyI6IFtdCn0K

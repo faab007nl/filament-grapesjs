@@ -17,7 +17,7 @@ import "toastify-js/src/toastify.css";
 
 document.addEventListener("alpine:init", function() {
     Alpine.data('grapesjs',
-        ({state, statePath, readOnly, optionsEncoded}) => ({
+        ({state, statePath, readOnly, options}) => ({
             editor: null,
             state: state,
             open: false,
@@ -28,17 +28,15 @@ document.addEventListener("alpine:init", function() {
             },
 
             init() {
+                console.log(this.state);
                 const self = this;
-                const options = JSON.parse(new Buffer(optionsEncoded, 'base64').toString('ascii'));
 
                 if (options === undefined) {
                     console.error('GrapesJs init failed: options undefined');
                     return;
                 }
 
-                console.log('GrapesJs init');
-                console.log(options);
-
+                console.log('GrapesJs Initialized');
                 this.editor =  grapesjs.init({
                     container: '#gjs',
                     height: '1024px',
